@@ -13,6 +13,7 @@ public interface BankAccountService {
     BankAccount updateBankAccount(Integer idaccount, BankAccount bankAccount);
 
     BankAccount getBankAccount(Integer idaccount);
+    BankAccount getBankAccountByUser();
 
     List<BankAccount> getAllBankAccount();
 }
