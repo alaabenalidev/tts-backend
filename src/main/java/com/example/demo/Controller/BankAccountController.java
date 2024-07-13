@@ -2,23 +2,20 @@ package com.example.demo.Controller;
 
 import com.example.demo.Service.BankAccountService;
 import com.example.demo.entity.BankAccount;
+import com.example.demo.entity.Dto.BankAccountAddRequest;
+import jakarta.persistence.Id;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/bankaccount")
-@CrossOrigin("*")
 public class BankAccountController {
 
-    private final BankAccountService bankAccountService;
-
     @Autowired
-    public BankAccountController(BankAccountService bankAccountService) {
-        this.bankAccountService = bankAccountService;
-    }
+    private BankAccountService bankAccountService;
 
     @PostMapping("/add")
-    public String addBankAccount(@RequestBody BankAccount bankAccount) {
+    public String addBankAccount(@RequestBody BankAccountAddRequest bankAccount) {
         bankAccountService.addBankAccount(bankAccount);
         return "success add BankAccount";
     }

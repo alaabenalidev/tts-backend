@@ -1,11 +1,12 @@
 package com.example.demo.Service;
 
 import com.example.demo.entity.BankAccount;
+import com.example.demo.entity.Dto.BankAccountAddRequest;
 
 import java.util.List;
 
 public interface BankAccountService {
-    BankAccount addBankAccount(BankAccount bankAccount);
+    BankAccount addBankAccount(BankAccountAddRequest bankAccount);
 
     boolean deleteBankAccount(Integer idaccount);
 

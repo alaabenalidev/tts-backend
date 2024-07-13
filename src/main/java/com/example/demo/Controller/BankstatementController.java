@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/Bankstatement")
-@CrossOrigin("*")
 public class BankstatementController {
 
     private final bankstatementServices bankstatementServices;

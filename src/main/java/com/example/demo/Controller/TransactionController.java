@@ -2,47 +2,43 @@ package com.example.demo.Controller;
 
 import com.example.demo.Service.TransactionService;
 import com.example.demo.entity.BankTransaction;
+import com.example.demo.entity.Dto.AddTransactionRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/Transaction")
-@CrossOrigin("*")
 public class TransactionController {
 
-    private final TransactionService s;
     @Autowired
-    public TransactionController(TransactionService s) {
-        this.s = s;
-    }
+    private TransactionService transactionService;
 
     @PostMapping("/add")
-    public String addTransaction(@RequestBody BankTransaction bankTransaction) {
-        s.addBankTransaction(bankTransaction);
-        return "success add Transaction";
+    public ResponseEntity<?> addTransaction(@RequestBody AddTransactionRequestDTO bankTransaction) {
+        return ResponseEntity.ok().body(transactionService.addBankTransaction(bankTransaction));
     }
 
     @DeleteMapping("/delete/{idTransaction}")
-    public String deleteTransaction(@PathVariable Integer idTransaction) {
-        s.deleteTransaction(idTransaction);
-        return "success delete Transaction";
+    public ResponseEntity<String> deleteTransaction(@PathVariable Integer idTransaction) {
+        transactionService.deleteTransaction(idTransaction);
+        return ResponseEntity.ok("success delete Transaction");
     }
 
     @PutMapping("/update/{idTransaction}")
-    public String updateTransaction(@PathVariable("idTransaction") Integer idTransaction, @RequestBody BankTransaction BankTransaction) {
-        s.updateTransaction(idTransaction, BankTransaction);
-        return "success update Transaction";
+    public ResponseEntity<String> updateTransaction(@PathVariable("idTransaction") Integer idTransaction, @RequestBody BankTransaction BankTransaction) {
+        transactionService.updateTransaction(idTransaction, BankTransaction);
+        return ResponseEntity.ok("success update Transaction");
     }
 
     @GetMapping("/{idTransaction}")
-    public String getTransaction(@PathVariable("idTransaction") Integer idTransaction) {
-        s.getTransaction(idTransaction);
-        return "success get Transaction";
+    public ResponseEntity<String> getTransaction(@PathVariable("idTransaction") Integer idTransaction) {
+        transactionService.getTransaction(idTransaction);
+        return ResponseEntity.ok("success get Transaction");
     }
 
     @GetMapping("/fetchAll")
-    public String getAllTransaction() {
-        s.getAllTransaction();
-        return "success get all Transaction";
+    public ResponseEntity<?> getAllTransaction() {
+        return ResponseEntity.ok(transactionService.getAllTransaction());
     }
 }

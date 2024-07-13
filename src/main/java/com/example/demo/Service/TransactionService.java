@@ -1,11 +1,12 @@
 package com.example.demo.Service;
 
 import com.example.demo.entity.BankTransaction;
+import com.example.demo.entity.Dto.AddTransactionRequestDTO;
 
 import java.util.List;
 
 public interface TransactionService {
-    BankTransaction addBankTransaction(BankTransaction bankTransaction);
+    BankTransaction addBankTransaction(AddTransactionRequestDTO bankTransaction);
 
     boolean deleteTransaction(Integer idTransaction);
 

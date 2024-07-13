@@ -1,12 +1,16 @@
 package com.example.demo.Service;
 
+import com.example.demo.entity.Dto.SubmitRequestDTO;
+import com.example.demo.security.user.User;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.User;
 
 import java.util.List;
 
 public interface UserService {
     User addUser(User user);
+
+    List<User> getRequestUsers();
+    void submitRequestUser(SubmitRequestDTO req);
 
     boolean deleteUser(Integer id);
 

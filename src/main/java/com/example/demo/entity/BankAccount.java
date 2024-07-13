@@ -1,15 +1,15 @@
 package com.example.demo.entity;
 
+import com.example.demo.security.user.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
 
-@Data
 @Entity
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class BankAccount {
@@ -18,14 +18,13 @@ public class BankAccount {
     private Integer idaccount;
     private Double sold;
     private String type;
-    private LocalDate dateOp;
-    private LocalDate dateCl;
+    @Column(unique = true)
+    private String rib;
+    private LocalDate dateOp=LocalDate.now();
+    private LocalDate dateCl=LocalDate.now();
 
-    @OneToMany(mappedBy = "bankAccount")
+    @OneToMany
     private List<BankTransaction> transactions; // Renamed from 'Transaction'
-
-    @OneToOne(mappedBy = "bankAccount")
-    private Visitor visitor;
 
     @OneToMany(mappedBy = "bankAccount")
     private List<bankstatement> bankStatements;
@@ -33,5 +32,8 @@ public class BankAccount {
     @ManyToOne
     @JoinColumn(name = "iduser")
     private User user;
+
+    @OneToOne
+    private CreditCard creditCard;
 
 }
